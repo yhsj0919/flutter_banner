@@ -9,14 +9,7 @@ import '../flutter_banner.dart';
 typedef ItemBuilder = Widget Function(BuildContext context, dynamic value);
 
 class KBanner extends StatefulWidget {
-  const KBanner({
-    Key? key,
-    required this.banners,
-    required this.itemBuilder,
-    this.activeColor,
-    this.disableColor,
-    this.aspectRatio,
-  }) : super(key: key);
+  const KBanner({Key? key, required this.banners, required this.itemBuilder, this.activeColor, this.disableColor, this.aspectRatio, this.onPageChanged}) : super(key: key);
 
   final List banners;
   final ItemBuilder itemBuilder;
@@ -25,6 +18,8 @@ class KBanner extends StatefulWidget {
 
   final Color? disableColor;
   final double? aspectRatio;
+
+  final ValueChanged? onPageChanged;
 
   @override
   _KBannerState createState() => _KBannerState();
@@ -64,6 +59,7 @@ class _KBannerState extends State<KBanner> with WidgetsBindingObserver {
     super.initState();
     _controller = PageController(keepPage: true, initialPage: 1);
     WidgetsBinding.instance?.addObserver(this);
+    _start();
   }
 
   @override
@@ -98,6 +94,7 @@ class _KBannerState extends State<KBanner> with WidgetsBindingObserver {
   /// Method for when to change the page
   /// returning an integer value
   Future<void> _onChangePage(int index) async {
+    widget.onPageChanged?.call(_banners[index]);
     if (index == 0) {
       //当前选中的是第一个位置，自动选中倒数第二个位置
       currentIndex = _banners.length - 2;
@@ -115,7 +112,6 @@ class _KBannerState extends State<KBanner> with WidgetsBindingObserver {
       realPosition = index - 1;
       if (realPosition < 0) realPosition = 0;
     }
-    setState(() {});
 
     setState(() => realPosition);
   }
