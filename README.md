@@ -10,7 +10,7 @@ KBanner(
               banner3,
               banner4,
             ],
-            itemBuild: (context, value) {
+            itemBuilder: (context, value) {
               return Container(
                 child: Image.network(
                   value.toString(),

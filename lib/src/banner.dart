@@ -6,20 +6,20 @@ import 'package:flutter_banner/src/indicators_widget.dart';
 
 import '../flutter_banner.dart';
 
-typedef ItemBuild = Widget Function(BuildContext context, dynamic value);
+typedef ItemBuilder = Widget Function(BuildContext context, dynamic value);
 
 class KBanner extends StatefulWidget {
   const KBanner({
     Key? key,
     required this.banners,
-    required this.itemBuild,
+    required this.itemBuilder,
     this.activeColor,
     this.disableColor,
     this.aspectRatio,
   }) : super(key: key);
 
   final List banners;
-  final ItemBuild itemBuild;
+  final ItemBuilder itemBuilder;
 
   final Color? activeColor;
 
@@ -76,7 +76,7 @@ class _KBannerState extends State<KBanner> with WidgetsBindingObserver {
             onNotification: onNotification,
             child: PageView.builder(
               controller: _controller,
-              itemBuilder: (context, index) => widget.itemBuild(context, _banners[index]),
+              itemBuilder: (context, index) => widget.itemBuilder(context, _banners[index]),
               onPageChanged: _onChangePage,
             ),
           ),
