@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:async';
-
-import 'package:flutter/services.dart';
 import 'package:flutter_banner/flutter_banner.dart';
 
 void main() {
@@ -32,23 +29,21 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: const Text('Banner'),
         ),
-        body: Container(
-          child: KBanner(
-            banners: [
-              banner1,
-              banner2,
-              banner3,
-              banner4,
-            ],
-            itemBuilder: (context, value) {
-              return Container(
-                child: Image.network(
-                  value.toString(),
-                  fit: BoxFit.cover,
-                ),
-              );
-            },
-          ),
+        body: KBanner(
+          banners: [
+            banner1,
+            banner2,
+            banner3,
+            banner4,
+          ],
+          itemBuilder: (context, value) {
+            return Container(
+              child: Image.network(
+                value.toString(),
+                fit: BoxFit.cover,
+              ),
+            );
+          },
         ),
       ),
     );

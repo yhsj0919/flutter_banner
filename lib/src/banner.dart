@@ -67,6 +67,7 @@ class _KBannerState extends State<KBanner> with WidgetsBindingObserver {
     return AspectRatio(
       aspectRatio: widget.aspectRatio ?? 2.5,
       child: Stack(
+        alignment: Alignment.bottomCenter,
         children: [
           NotificationListener(
             onNotification: onNotification,
@@ -76,16 +77,13 @@ class _KBannerState extends State<KBanner> with WidgetsBindingObserver {
               onPageChanged: _onChangePage,
             ),
           ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: rowIndicator,
-              ),
+          Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: rowIndicator,
             ),
-          )
+          ),
         ],
       ),
     );
